@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,height=device-height,initial-scale=0.95">
@@ -10,7 +11,12 @@
       <![endif]-->
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" href="css/animate.css">
-	<script src="js/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/jquery.pagepiling.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script type="text/javascript" src="js/jquery.pagepiling.js"></script>
+
+    <!--script src="js/jquery-1.11.1.min.js"></script-->
 	<script src="js/d3.min.js"></script>
 	<!--link href='http://fonts.googleapis.com/css?family=Poiret+One|Gloria+Hallelujah' rel='stylesheet' type='text/css'-->
     <link href='http://fonts.googleapis.com/css?family=Bad+Script|Pacifico' rel='stylesheet' type='text/css'>
@@ -25,17 +31,35 @@
 
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css" />
 	<script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
-<div id="menu"><text>Frapparduino</text></div>	
+    <script type="text/javascript" src="js/custom.js" charset="utf-8" ></script>
+
+<!--div id="menu"><text>Frapparduino</text><div id="about">about</div><div id="who">who</div><div id="demo">demo</div></div-->	
+
+<!--div id="menu">
+    <text>Frapparduino</text>
+    <div id="about"> <li data-menuanchor="slide1" class="active"><a href="#slide1"> about</a></li></div>
+    <div id="who"><li data-menuanchor="slide2"><a href="#slide2">who</a></li></div>
+    <div id="demo"><li data-menuanchor="slide3"><a href="#slide3">demo</a></li></div>
+</div-->  
+
 </head>
 
     <body>
-    <div id="background">
-        <img src="../img/slide1.jpg" class="stretch" alt=""> 
-        <img src="../img/slide2.jpg" class="stretch" alt="">
-    </div>
-
+<div id="menuheader">
+<text>Frapparduino</text>
+<ul id="menu">
+        
+        <li data-menuanchor="page1" class="active"><a href="#page1">about</a></li>
+        <li data-menuanchor="page2"><a href="#page2">who</a></li>
+        <li data-menuanchor="page3"><a href="#page3">demo</a></li>
+    </ul>
+</div>
+<div id="pagepiling">
+    <img src="../img/slide1.jpg" class="stretch section">
+    <img src="../img/slide2.jpg" class="stretch section">
+    <img src="../img/slide3.jpg" class="stretch section">
+</div>
     </body>
 
-	  <script type="text/javascript" src="js/custom.js" charset="utf-8" ></script>
-
+	  
 </html>
