@@ -1,0 +1,115 @@
+#!/usr/bin/env node
+var debug = require('debug')('app');
+var app = require('../app');
+
+app.set('port', process.env.PORT || 3000);
+
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});
+
+var io = require('socket.io').listen(server);
+io.on('connection', function (socket) {
+  socket.on('order', function (data) {
+    console.log(data);
+    if (data['type'] ==  'mocha')
+    {
+    	mocha();
+    } 
+    else if (data['type'] ==  'caramel')
+    {
+    	caramel();
+    }
+    else if (data['type'] ==  'coffee')
+    {
+    	coffee();
+    }
+  });
+});
+
+// FRAPPARDUINO STUFF
+var five = require("johnny-five"),
+	board = new five.Board();
+
+board.on("ready",function(){
+	console.log("Board Ready");
+
+	console.log('setting up relay 7')
+	bot1 = new five.Relay(7);
+
+	console.log('setting up relay 8')
+	bot2 = new five.Relay(8);
+
+	console.log('setting up relay 9')
+	bot3 = new five.Relay(9);
+/*
+	console.log('setting up relay 10')
+	bot4 = new five.Relay(10);
+
+	console.log('setting up relay 11')
+	bot5 = new five.Relay(11);
+
+	console.log('setting up relay 12')
+	bot6 = new five.Relay(12);*/
+
+	  this.repl.inject({
+	  	// milk
+	  	bot1 : bot1,
+	  	// coffee base
+	  	bot2 : bot2,
+	  	// cream base
+	  	bot3 : bot3/*,
+	  	// caramel sauce
+	  	bot4 : bot4,
+	  	// mocha sauce
+	  	bot5 : bot5,
+	  	// coffee
+	  	bot6 : bot6*/
+	  });
+	  console.log("Components initialized");
+});
+
+console.log("\n Connecting to the arduino...");
+
+function mocha(){
+	// amount of milk
+    bot1.on();
+    setTimeout(function(){bot1.off()},2000);
+    // amount of coffee base
+    bot2.on();
+    setTimeout(function(){bot2.off()},2000);
+    // amount of mocha sauce
+    bot4.on()
+    setTime(function(){bot4.off()},2000);
+    // amount of coffee
+    bot6.on()
+    setTime(function(){bot6.off()},2000);
+}
+
+function caramel(){
+	// amount of milk
+    bot1.on();
+    setTimeout(function(){bot1.off()},2000);
+    // amount of coffee base
+    bot2.on();
+    setTimeout(function(){bot2.off()},2000);
+    // amount of mocha sauce
+    bot5.on()
+    setTime(function(){bot5.off()},2000);
+    // amount of coffee
+    bot6.on()
+    setTime(function(){bot6.off()},2000);
+}
+
+function coffee(){
+	// amount of milk
+    bot1.on();
+    setTimeout(function(){bot1.off()},2000);
+    // amount of coffee base
+    bot2.on();
+    setTimeout(function(){bot2.off()},2000);
+    // amount of coffee
+    bot6.on()
+    setTime(function(){bot6.off()},2000);
+
+}

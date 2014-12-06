@@ -1,0 +1,41 @@
+div.carousel-caption{
+
+}
+
+.carousel-inner > .item > img {
+    margin: 0 auto;
+}
+
+h1{
+	text-align: center;
+}
+div#heading{
+		background-color: #6F4E37;
+
+}
+
+
+
+div#heading h1{
+	font-family: 'Pacifico', cursive;
+	font-size: 32px;
+	color: white;
+    text-shadow: 2px 2px black;
+}
+
+
+body{
+		background-color: #6F4E37;
+}
+html{
+	background-color: #6F4E37;
+}
+
+
+div.carousel-inner {
+  background-color: #A67B5B;
+}
+/*
+.carousel-control.right, .carousel-control.left {
+  background-image:none;
+}*/
