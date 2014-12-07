@@ -92,13 +92,28 @@
       socket.on('news', function (data) {
         console.log(data);
       });
-      $( "#mfrap" ).click(function() {
-      	socket.emit('order', { type: 'mocha' });});
-      $( "#cfrap" ).click(function() {
-      	socket.emit('order', { type: 'caramel' });});
-	  $( "#coffrap" ).click(function() {
-      	socket.emit('order', { type: 'coffee' });});
 
+     $( "#mfrap" ).click(function() {
+      	if (confirm('Please insert one cup of ice and then click ok to proceed!')) {
+      		socket.emit('order', { type: 'mocha' });
+      	}
+      	else
+      		return false;
+      	});
+      $( "#cfrap" ).click(function() {
+      if (confirm('Please insert one cup of ice and then click ok to proceed!')) {
+      	socket.emit('order', { type: 'caramel' });
+      }
+      else
+      	return false;
+      });
+	  $( "#coffrap" ).click(function() {
+	 if (confirm('Please insert one cup of ice and then click ok to proceed!')) {
+      	socket.emit('order', { type: 'coffee' });
+	}
+	else 
+		return false;
+	});
     </script>
     
   </body>

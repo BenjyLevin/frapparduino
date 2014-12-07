@@ -8,6 +8,8 @@ var server = app.listen(app.get('port'), function() {
   debug('Express server listening on port ' + server.address().port);
 });
 
+var device = [];
+
 var io = require('socket.io').listen(server);
 io.on('connection', function (socket) {
   socket.on('order', function (data) {
@@ -33,45 +35,45 @@ var five = require("johnny-five"),
 
 board.on("ready",function(){
 	console.log("Board Ready");
-
-	console.log('setting up relay 7')
-	bot1 = new five.Relay(7);
-
-	console.log('setting up relay 8')
-	bot2 = new five.Relay(8);
-
-	console.log('setting up relay 9')
-	bot3 = new five.Relay(9);
-/*
-	console.log('setting up relay 10')
-	bot4 = new five.Relay(10);
-
-	console.log('setting up relay 11')
-	bot5 = new five.Relay(11);
-
-	console.log('setting up relay 12')
-	bot6 = new five.Relay(12);*/
+    for (var i = 1; i <= 7; i++) {
+	try {
+    console.log("Setting up relay pin " + (i+6));
+    device[i] = new five.Relay(i+6);
+    if(!device[i].id) throw err;
+    console.log("success");
+    }
+    catch(err){
+        console.log("SETTING UP RELAY PIN " + (i+6) + " FAILED!");
+    }};
 
 	  this.repl.inject({
 	  	// milk
-	  	bot1 : bot1,
+	  	bot1 : device[1],
 	  	// coffee base
-	  	bot2 : bot2,
+	  	bot2 : device[2],
 	  	// cream base
-	  	bot3 : bot3/*,
+	  	bot3 : device[3],
 	  	// caramel sauce
-	  	bot4 : bot4,
+	  	bot4 : device[4],
 	  	// mocha sauce
-	  	bot5 : bot5,
+	  	bot5 : device[5],
 	  	// coffee
-	  	bot6 : bot6*/
+	  	bot6 : device[6],
 	  });
 	  console.log("Components initialized");
 });
 
 console.log("\n Connecting to the arduino...");
 
+var bot1 = device[1];
+var bot2 = device[2];
+var bot3 = device[3];
+var bot4 = device[4];
+var bot5 = device[5];
+var bot6 = device[6];
+
 function mocha(){
+    try{
 	// amount of milk
     bot1.on();
     setTimeout(function(){bot1.off()},2000);
@@ -84,9 +86,12 @@ function mocha(){
     // amount of coffee
     bot6.on()
     setTime(function(){bot6.off()},2000);
+    }
+    catch(err){console.log("Sorry something went wrong with the Mocha dispensing function - please check that all appropriate bottles are installed.");}
 }
 
 function caramel(){
+    try{
 	// amount of milk
     bot1.on();
     setTimeout(function(){bot1.off()},2000);
@@ -99,9 +104,12 @@ function caramel(){
     // amount of coffee
     bot6.on()
     setTime(function(){bot6.off()},2000);
+    }
+    catch(err){console.log("Sorry something went wrong with the Mocha dispensing function - please check that all appropriate bottles are installed.");}
 }
 
 function coffee(){
+    try{
 	// amount of milk
     bot1.on();
     setTimeout(function(){bot1.off()},2000);
@@ -111,5 +119,6 @@ function coffee(){
     // amount of coffee
     bot6.on()
     setTime(function(){bot6.off()},2000);
-
+    }
+    catch(err){console.log("Sorry something went wrong with the Mocha dispensing function - please check that all appropriate bottles are installed.");}
 }
