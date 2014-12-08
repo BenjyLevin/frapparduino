@@ -35,15 +35,17 @@ var five = require("johnny-five"),
 
 board.on("ready",function(){
 	console.log("Board Ready");
-    for (var i = 1; i <= 7; i++) {
-	try {
-    console.log("Setting up relay pin " + (i+6));
-    device[i] = new five.Relay(i+6);
-    if(!device[i].id) throw err;
-    console.log("success");
-    }
-    catch(err){
-        console.log("SETTING UP RELAY PIN " + (i+6) + " FAILED!");
+    for (var i = 1; i <= 5; i++) {
+    	try {
+            console.log("Setting up relay pin " + (i+1));
+            device[i] = new five.Relay(i+1);
+            //if(!device[i].id) throw err;
+            // not too sure how to throw error here if the device is not actually present
+            // maybe this is not possible?! sighs
+            console.log("success");
+        }
+        catch(err){
+            console.log("SETTING UP RELAY PIN " + (i+1) + " FAILED!");
     }};
 
 	  this.repl.inject({
@@ -59,6 +61,13 @@ board.on("ready",function(){
 	  	bot5 : device[5],
 	  	// coffee
 	  	bot6 : device[6],
+        // turn blender on
+        blender_on_button : device[7],
+        // turn blender off
+        blender_off_button : device[8]
+        // servo
+        // servo : device[9]
+
 	  });
 	  console.log("Components initialized");
 });
@@ -71,6 +80,9 @@ var bot3 = device[3];
 var bot4 = device[4];
 var bot5 = device[5];
 var bot6 = device[6];
+var blender_on_button = device[7];
+var blender_off_button = device[8];
+//var servo = device[9];
 
 function mocha(){
     try{
