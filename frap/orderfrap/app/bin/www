@@ -8,85 +8,77 @@ var server = app.listen(app.get('port'), function() {
   debug('Express server listening on port ' + server.address().port);
 });
 
-var device = [];
-
 var io = require('socket.io').listen(server);
 io.on('connection', function (socket) {
   socket.on('order', function (data) {
     console.log(data);
     if (data['type'] ==  'mocha')
     {
-    	mocha();
+        mocha();
     } 
     else if (data['type'] ==  'caramel')
     {
-    	caramel();
+        caramel();
     }
     else if (data['type'] ==  'coffee')
     {
-    	coffee();
+        coffee();
     }
   });
 });
 
 // FRAPPARDUINO STUFF
 var five = require("johnny-five"),
-	board = new five.Board();
+    board = new five.Board();
 
 board.on("ready",function(){
-	console.log("Board Ready");
-    for (var i = 1; i <= 5; i++) {
-    	try {
-            console.log("Setting up relay pin " + (i+1));
-            device[i] = new five.Relay(i+1);
-            //if(!device[i].id) throw err;
-            // not too sure how to throw error here if the device is not actually present
-            // maybe this is not possible?! sighs
-            console.log("success");
-        }
-        catch(err){
-            console.log("SETTING UP RELAY PIN " + (i+1) + " FAILED!");
-    }};
+    console.log("Board Ready");
 
-	  this.repl.inject({
-	  	// milk
-	  	bot1 : device[1],
-	  	// coffee base
-	  	bot2 : device[2],
-	  	// cream base
-	  	bot3 : device[3],
-	  	// caramel sauce
-	  	bot4 : device[4],
-	  	// mocha sauce
-	  	bot5 : device[5],
-	  	// coffee
-	  	bot6 : device[6],
-        // turn blender on
-        blender_on_button : device[7],
-        // turn blender off
-        blender_off_button : device[8]
-        // servo
-        // servo : device[9]
+    console.log('setting up relay pin 6 - bot1')
+    bot1 = new five.Relay(6);
 
-	  });
-	  console.log("Components initialized");
+    console.log('setting up relay pin 7 - bot2')
+    bot2 = new five.Relay(7);
+
+    console.log('setting up relay pin 8 - bot3')
+    bot3 = new five.Relay(8);
+
+    console.log('setting up relay pin 9 - bot4')
+    bot4 = new five.Relay(9);
+
+    console.log('setting up relay pin 10 - bot5')
+    bot5 = new five.Relay(10);
+
+    console.log('setting up relay pin 11 - blender_on_button')
+    blender_on_button = new five.Relay(11);
+    
+    console.log('setting up relay pin 4 - blender_off_button')
+    blender_off_button = new five.Relay(4);
+    
+
+      this.repl.inject({
+        // milk
+        bot1 : bot1,
+        // coffee base
+        bot2 : bot2,
+        // coffee
+        bot3 : bot3,
+        // caramel sauce
+        bot4 : bot4,
+        // mocha sauce
+        bot5 : bot5,
+        // blender on button
+        blender_on_button : blender_on_button,
+        // blender off button
+        blender_off_button : blender_off_button,
+      });
+      console.log("Components initialized");
 });
 
 console.log("\n Connecting to the arduino...");
 
-var bot1 = device[1];
-var bot2 = device[2];
-var bot3 = device[3];
-var bot4 = device[4];
-var bot5 = device[5];
-var bot6 = device[6];
-var blender_on_button = device[7];
-var blender_off_button = device[8];
-//var servo = device[9];
-
 function mocha(){
-    try{
-	// amount of milk
+    // amount of milk
     bot1.on();
     setTimeout(function(){bot1.off()},2000);
     // amount of coffee base
@@ -94,17 +86,27 @@ function mocha(){
     setTimeout(function(){bot2.off()},2000);
     // amount of mocha sauce
     bot4.on()
-    setTime(function(){bot4.off()},2000);
+    setTimeout(function(){bot4.off()},2000);
     // amount of coffee
-    bot6.on()
-    setTime(function(){bot6.off()},2000);
-    }
-    catch(err){console.log("Sorry something went wrong with the Mocha dispensing function - please check that all appropriate bottles are installed.");}
+    bot3.on()
+    setTimeout(function(){bot3.off()},2000);
+
+   // key press duration for on
+    setTimeout(function(){
+        blender_on_button.on();
+        setTimeout(function(){blender_on_button.off()},3000);
+    },2000);
+    // key press duration for off
+    setTimeout(function(){
+        blender_off_button.on();
+        setTimeout(function(){blender_off_button.off()},3000);
+    },4000);
+    
+
 }
 
 function caramel(){
-    try{
-	// amount of milk
+    // amount of milk
     bot1.on();
     setTimeout(function(){bot1.off()},2000);
     // amount of coffee base
@@ -112,25 +114,51 @@ function caramel(){
     setTimeout(function(){bot2.off()},2000);
     // amount of mocha sauce
     bot5.on()
-    setTime(function(){bot5.off()},2000);
+    setTimeout(function(){bot5.off()},2000);
     // amount of coffee
-    bot6.on()
-    setTime(function(){bot6.off()},2000);
-    }
-    catch(err){console.log("Sorry something went wrong with the Mocha dispensing function - please check that all appropriate bottles are installed.");}
+    bot3.on()
+    setTimeout(function(){bot3.off()},2000);
+
+          // key press duration for on
+    setTimeout(function(){
+        blender_on_button.on();
+        setTimeout(function(){blender_on_button.off()},3000);
+    },2000);
+    // key press duration for off
+    setTimeout(function(){
+        blender_off_button.on();
+        setTimeout(function(){blender_off_button.off()},3000);
+    },4000);
+    
+
+
 }
 
 function coffee(){
-    try{
-	// amount of milk
+    // amount of milk
     bot1.on();
     setTimeout(function(){bot1.off()},2000);
     // amount of coffee base
     bot2.on();
     setTimeout(function(){bot2.off()},2000);
     // amount of coffee
-    bot6.on()
-    setTime(function(){bot6.off()},2000);
-    }
-    catch(err){console.log("Sorry something went wrong with the Mocha dispensing function - please check that all appropriate bottles are installed.");}
+    bot3.on()
+    setTimeout(function(){bot3.off()},2000);
+
+        // key press duration for on
+    setTimeout(function(){
+        blender_on_button.on();
+        // the below value is for how long to broadcast blend signal
+        setTimeout(function(){blender_on_button.off()},3000);
+        //the below value is for how long after the syrups start that the blender must wait
+        // i.e. longest of the syrups turn off time
+    },2000);
+
+    // key press duration for off
+    setTimeout(function(){
+        blender_off_button.on();
+        setTimeout(function(){blender_off_button.off()},3000);
+    // blend duration (minus blend start time set above
+    },4000);
+    
 }
