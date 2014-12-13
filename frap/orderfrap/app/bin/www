@@ -52,8 +52,8 @@ board.on("ready",function(){
     console.log('setting up relay pin 11 - blender_on_button')
     blender_on_button = new five.Relay(11);
     
-    console.log('setting up relay pin 4 - blender_off_button')
-    blender_off_button = new five.Relay(4);
+    console.log('setting up relay pin 3 - blender_off_button')
+    blender_off_button = new five.Relay(3);
     
 
       this.repl.inject({
@@ -80,27 +80,27 @@ console.log("\n Connecting to the arduino...");
 function mocha(){
     // amount of milk
     bot1.on();
-    setTimeout(function(){bot1.off()},2000);
+    setTimeout(function(){bot1.off()},4000);
     // amount of coffee base
     bot2.on();
     setTimeout(function(){bot2.off()},2000);
-    // amount of mocha sauce
-    bot4.on()
-    setTimeout(function(){bot4.off()},2000);
     // amount of coffee
     bot3.on()
-    setTimeout(function(){bot3.off()},2000);
-
+    setTimeout(function(){bot3.off()},1000);
+	// amount of mocha sauce
+    bot4.on()
+    setTimeout(function(){bot4.off()},4000);
+    
    // key press duration for on
     setTimeout(function(){
         blender_on_button.on();
         setTimeout(function(){blender_on_button.off()},3000);
-    },2000);
+    },4000);
     // key press duration for off
     setTimeout(function(){
         blender_off_button.on();
         setTimeout(function(){blender_off_button.off()},3000);
-    },4000);
+    },18000);
     
 
 }
@@ -108,27 +108,27 @@ function mocha(){
 function caramel(){
     // amount of milk
     bot1.on();
-    setTimeout(function(){bot1.off()},2000);
+    setTimeout(function(){bot1.off()},4000);
     // amount of coffee base
     bot2.on();
-    setTimeout(function(){bot2.off()},2000);
+    setTimeout(function(){bot2.off()},4000);
     // amount of mocha sauce
     bot5.on()
-    setTimeout(function(){bot5.off()},2000);
+    setTimeout(function(){bot5.off()},3000);
     // amount of coffee
     bot3.on()
-    setTimeout(function(){bot3.off()},2000);
+    setTimeout(function(){bot3.off()},1000);
 
           // key press duration for on
     setTimeout(function(){
         blender_on_button.on();
         setTimeout(function(){blender_on_button.off()},3000);
-    },2000);
+    },4000);
     // key press duration for off
     setTimeout(function(){
         blender_off_button.on();
         setTimeout(function(){blender_off_button.off()},3000);
-    },4000);
+    },18000);
     
 
 
@@ -137,13 +137,13 @@ function caramel(){
 function coffee(){
     // amount of milk
     bot1.on();
-    setTimeout(function(){bot1.off()},2000);
+    setTimeout(function(){bot1.off()},4000);
     // amount of coffee base
     bot2.on();
     setTimeout(function(){bot2.off()},2000);
     // amount of coffee
     bot3.on()
-    setTimeout(function(){bot3.off()},2000);
+    setTimeout(function(){bot3.off()},1000);
 
         // key press duration for on
     setTimeout(function(){
@@ -152,13 +152,13 @@ function coffee(){
         setTimeout(function(){blender_on_button.off()},3000);
         //the below value is for how long after the syrups start that the blender must wait
         // i.e. longest of the syrups turn off time
-    },2000);
+    },4000);
 
     // key press duration for off
     setTimeout(function(){
         blender_off_button.on();
         setTimeout(function(){blender_off_button.off()},3000);
     // blend duration (minus blend start time set above
-    },4000);
+    },18000);
     
 }
